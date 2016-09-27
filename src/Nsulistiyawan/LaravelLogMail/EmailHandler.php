@@ -31,8 +31,13 @@ class EmailHandler
                     $data['errors']['source'] = 'WEB APPLICATION';
                     $data['errors']['user'] = !empty($app['auth']->user()) ? $app['auth']->user()->username : 'Guest';
                 }
-                $data['errors']['reason'] = $message->getMessage();
-                $data['errors']['file'] = $message->getFile().':'.$message->getLine();
+                if(is_string($message) == false){
+                    $data['errors']['reason'] = $message->getMessage();
+                    $data['errors']['file'] = $message->getFile().':'.$message->getLine();
+                }
+                else{
+                    $data['errors']['reason'] = $message;
+                }
                 Mail::send('logemail::layout', $data, function($message) use ($data, $recipient, $date_formatted){
                     $message->from('contact@fundplaces.com','Error Reporter');
                     $message->to($recipient,'Developer')->subject('Error Happened at '.$date_formatted);
