@@ -1,0 +1,22 @@
+{
+    "name": "nsulistiyawan/laravel-log-mail",
+    "description": "Laravel 4 packages for sending log error to email",
+    "keywords" : ["laravel","log","email"],
+    "license" : "MIT",
+    "authors": [
+        {
+            "name": "Neno Sulistiyawan",
+            "email": "aburamesino@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Nsulistiyawan\\LaravelLogMail": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
