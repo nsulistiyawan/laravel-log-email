@@ -27,7 +27,7 @@ class EmailHandler
                 }
                 else{
                     $data['errors']['accessed url'] = $app['request']->fullUrl();
-                    $data['errors']['input'] = $app['request']->all();
+                    $data['errors']['input'] = $this->maskImportantData($app['request']->all());
                     $data['errors']['source'] = 'WEB APPLICATION';
                     $data['errors']['user'] = !empty($app['auth']->user()) ? $app['auth']->user()->username : 'Guest';
                 }
@@ -45,6 +45,35 @@ class EmailHandler
                 Log::info('Error report send to '.$recipient);
             }
         }
+    }
+
+    private function maskAllString($target) {
+        $output = substr_replace($target, str_repeat('*', strlen($target)), 0);
+        return $output;
+    }
+
+    private function maskImportantData($array){
+        if(is_array($array)){
+            if(!empty($array['new_key'])){
+                $array['new_key'] = maskAllString($array['new_key']);
+            }
+            if(!empty($array['old_key'])){
+                $array['old_key'] = maskAllString($array['old_key']);
+            }
+            if(!empty($array['for_key'])){
+                $array['for_key'] = maskAllString($array['for_key']);
+            }
+            elseif (!empty($array['key'])){
+                $array['key'] = maskAllString($array['key']);
+            }
+            elseif (!empty($array['pin'])){
+                $array['pin'] = maskAllString($array['pin']);
+            }
+            elseif (!empty($array['password'])){
+                $array['password'] = maskAllString($array['password']);
+            }
+        }
+        return $array;
     }
 
 
