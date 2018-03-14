@@ -55,22 +55,22 @@ class EmailHandler
     private function maskImportantData($array){
         if(is_array($array)){
             if(!empty($array['new_key'])){
-                $array['new_key'] = maskAllString($array['new_key']);
+                $array['new_key'] = $this->maskAllString($array['new_key']);
             }
             if(!empty($array['old_key'])){
-                $array['old_key'] = maskAllString($array['old_key']);
+                $array['old_key'] = $this->maskAllString($array['old_key']);
             }
             if(!empty($array['for_key'])){
-                $array['for_key'] = maskAllString($array['for_key']);
+                $array['for_key'] = $this->maskAllString($array['for_key']);
             }
             elseif (!empty($array['key'])){
-                $array['key'] = maskAllString($array['key']);
+                $array['key'] = $this->maskAllString($array['key']);
             }
             elseif (!empty($array['pin'])){
-                $array['pin'] = maskAllString($array['pin']);
+                $array['pin'] = $this->maskAllString($array['pin']);
             }
             elseif (!empty($array['password'])){
-                $array['password'] = maskAllString($array['password']);
+                $array['password'] = $this->maskAllString($array['password']);
             }
         }
         return $array;
